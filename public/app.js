@@ -93,7 +93,7 @@ form.addEventListener('submit', async event => {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(),20000);
   try {
-    const response = await fetch('/api/rsvp',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...payload,id:submissionId}),signal:controller.signal});
+    const response = await fetch('/.netlify/functions/rsvp',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...payload,id:submissionId}),signal:controller.signal});
     const result = await response.json();
     if (!response.ok || result.ok !== true) throw new Error(result.error || 'Votre réponse n’a pas pu être enregistrée. Veuillez réessayer.');
     form.hidden = true;
